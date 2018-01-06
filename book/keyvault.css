@@ -1,0 +1,38 @@
+.page-inner {
+    max-width: 1000px;
+}
+
+.keyvault h6 {
+    font-size: 11px;
+}
+
+.keyvault .value {
+    border-color : #bbb;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    height: 23px;
+    outline: 0;
+    padding: 2px 8px 4px;
+    width: 100%;
+    background-color: #e6e6e6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-overflow: ellipsis;
+    font-size: 12px;
+}
+
+.keyvault .valuediv {
+    display: inline-block;
+    width: calc(100% - 50px);
+}
+
+.keyvault .detailsdiv {
+    display: none;
+}
+
+.keyvault .actiondiv {
+    float: right;
+}
+
+.keyvault a {
+}
