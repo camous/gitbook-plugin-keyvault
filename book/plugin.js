@@ -1,7 +1,7 @@
 require(['gitbook', 'jquery'], function (gitbook, $) {
   console.log('gitbook-plugin-keyvault initiated');
 
-  gitbook.events.bind('page.change', function () {
+  gitbook.events.bind('page.change', function (context) {
     $('code.lang-keyvaultsecret').each(function (index, element) {
       var $element = $(element);
       var $pre = $element.parent();
@@ -9,12 +9,12 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
 
       var settings = {
         crossDomain: true,
-        url: '/keyvault/secret/' + encodeURIComponent(code),
+        url: gitbook.page.getState().bookRoot + 'keyvault/secret/' + encodeURIComponent(code),
         method: 'GET'
       };
 
       $.ajax(settings).done(function (response) {
-        console.log(response);
+        //console.log(response);
         $pre.replaceWith(printSecret(response));
       });
     });
@@ -47,14 +47,14 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
 
       var settings = {
         crossDomain: true,
-        url: '/keyvault/namespace/' + encodeURIComponent(code),
+        url: gitbook.page.getState().bookRoot + 'keyvault/namespace/' + encodeURIComponent(code),
         method: 'GET'
       };
 
       $.ajax(settings).done(function (response) {
-        console.log(response);
-        var list = "";
-        for (var id in response){
+        // console.log(response);
+        var list = '';
+        for (var id in response) {
           var secret = response[id];
           list += printSecret(secret);
         }
@@ -67,5 +67,5 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
 function copyToClipboard(input) {
   $('#' + input).focus().select();
   document.execCommand('copy');
-  console.log('copy to clipboard');
+  // console.log('copy to clipboard');
 }
