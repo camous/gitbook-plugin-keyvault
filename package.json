@@ -1,6 +1,6 @@
 {
     "name": "gitbook-plugin-keyvault",
-    "description": "Bearingpoing KeyVault for GitBook",
+    "description": "Bearingpoint KeyVault for GitBook",
     "main": "index.js",
     "version": "0.0.2",
     "engines": {
