@@ -1,7 +1,7 @@
 require(['gitbook', 'jquery'], function (gitbook, $) {
   console.log('gitbook-plugin-keyvault initiated');
 
-  gitbook.events.bind('page.change', function (context) {
+  gitbook.events.bind('page.change', function () {
     $('code.lang-keyvaultsecret').each(function (index, element) {
       var $element = $(element);
       var $pre = $element.parent();
@@ -14,7 +14,7 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
       };
 
       $.ajax(settings).done(function (response) {
-        //console.log(response);
+        // console.log(response);
         $pre.replaceWith(printSecret(response));
       });
     });
@@ -22,20 +22,22 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
     function printSecret(secret) {
 
       var secretValue = secret.value || (secret.error + ' needs one of ' + secret.tags.roles.replace(/"/g, '\''));
-
+      var detailsSecret = secret;
+      delete detailsSecret.value;
+      
       return `<div class="keyvault">
         <h6>` + secret.name.toUpperCase() + `</h6>
-        <div>
+        <div class="secret">
           <div class="valuediv">
             <input id="input_` + secret.name + `" class="value" value="` + secretValue + `" />
           </div>
           <div class="actiondiv">
             <a href="" onclick="copyToClipboard('input_` + secret.name + `');"><i class="fa fa-clipboard" aria-hidden="true"></i></a>&nbsp; 
-            <a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+            <a href="#" onclick="$('#details_` + secret.name + `').toggle();"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
           </div>
         </div>
         <div class="detailsdiv" id="details_` + secret.name + `"><pre>
-          ` + JSON.stringify(secret) + `
+          ` + JSON.stringify(detailsSecret, null, 1) + `
         </pre></div>
       </div>`;
     }
