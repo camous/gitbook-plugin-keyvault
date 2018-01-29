@@ -36,7 +36,7 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
             <a href="#" onclick="$('#details_` + secret.name + `').toggle();"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
           </div>
         </div>
-        <div class="detailsdiv" id="details_` + secret.name + `"><pre>
+        <div class="detailsdiv" id="details_` + secret.name + `"><pre class="keyvaultdetails">
           ` + JSON.stringify(detailsSecret, null, 1) + `
         </pre></div>
       </div>`;
@@ -44,6 +44,7 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
 
     $('code.lang-keyvaultnamespace').each(function (index, element) {
       var $element = $(element);
+      $element.append('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
       var $pre = $element.parent();
       var code = $element.text().trim();
 

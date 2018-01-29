@@ -30,6 +30,10 @@
     display: none;
 }
 
+.keyvault .detailsdiv .keyvaultdetails {
+    font-size: 10px;
+}
+
 .keyvault .actiondiv {
     float: right;
 }
