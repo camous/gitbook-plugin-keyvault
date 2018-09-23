@@ -4,12 +4,13 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
   gitbook.events.bind('page.change', function () {
     $('code.lang-keyvaultsecret').each(function (index, element) {
       var $element = $(element);
+      $element.append('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
       var $pre = $element.parent();
       var code = $element.text().trim();
 
       var settings = {
         crossDomain: true,
-        url: gitbook.page.getState().bookRoot + 'keyvault/secret/' + encodeURIComponent(code),
+        url: window.location.origin + '/keyvault/secret/' + encodeURIComponent(code),
         method: 'GET'
       };
 
@@ -50,7 +51,7 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
 
       var settings = {
         crossDomain: true,
-        url: gitbook.page.getState().bookRoot + 'keyvault/namespace/' + encodeURIComponent(code),
+        url: window.location.origin + '/keyvault/namespace/' + encodeURIComponent(code),
         method: 'GET'
       };
 
@@ -70,5 +71,4 @@ require(['gitbook', 'jquery'], function (gitbook, $) {
 function copyToClipboard(input) {
   $('#' + input).focus().select();
   document.execCommand('copy');
-  // console.log('copy to clipboard');
 }
